@@ -1,0 +1,29 @@
+.input-form {
+    width: 100%;
+    margin-bottom: 2%;
+}
+
+form {
+    height: 40px;
+    display: flex;
+    padding: 10px;
+}
+
+.input {
+    width: 70%;
+    height: 40px;
+    margin-left: 5%;
+    padding: 2%;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 2%;
+    background-color: rgba(200, 219, 241, 0.7);
+}
+
+.add {
+    background: none;
+    border: none;
+    color: rgba(200, 219, 241, 0.7);
+    margin-top: 6%;
+    font-size: large;
+}

@@ -1,26 +1,66 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
+
+import TaskIndicator from './components/TaskIndicator/TaskIndicator.component';
+
+import InputForm from './components/InputForm/InputForm.component.jsx';
+
+import ToDoList from './components/ToDoList/ToDoList.component';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      lists: [
+        { task: 'task1', id: 1 },
+
+        { task: 'task2', id: 2 },
+
+        { task: 'task3', id: 3 }
+      ],
+
+      input: ''
+    }
+  }
+
+  handleChange = (e) => {
+    this.setState({input: e.target.value})
+  }
+
+  handleSubmit = (e) => {
+    let list;
+    e.preventDefault();
+    if (this.state.input === '') {
+      return;
+    } else {
+     list = {task: this.state.input, id:this.state.lists.length + 1};
+    };
+
+    this.setState({ lists: [...this.state.lists, list], input: '' });
+    document.getElementById('myForm').reset();
+  }
+
+  handleDelete = (index) => {
+    const filteredList = this.state.lists.filter(list => {
+      return list.id !== index;
+    })
+    this.setState({lists: filteredList})
+  }
+
+  render () {
+    return (
+      <div className='App'>
+        <InputForm onChange={this.handleChange} onSubmit={this.handleSubmit}/>
+
+        <ToDoList  lists={this.state.lists} onDelete={this.handleDelete}/>
+
+        <TaskIndicator  number={this.state.lists.length}/>
+      </div>
+      
+    )
+  }
 }
 
 export default App;
